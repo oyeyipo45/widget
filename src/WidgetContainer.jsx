@@ -7,6 +7,7 @@ export const TOKEN = process.env["REACT_APP_BEARER_TOKEN"];
 export const BASE_URL = process.env["REACT_APP_BASE_URL"];
 
 
+
 export const WidgetContainer = ({license = "", greeting = ""}) => {
 
     const { messages, sendMessage } = useChat();
