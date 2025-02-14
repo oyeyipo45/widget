@@ -1,10 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { Widget } from "./Widget";
 import { nanoid } from "nanoid";
 import { useChat } from "./ChatProvider";
-
-export const TOKEN = process.env["REACT_APP_BEARER_TOKEN"];
-export const BASE_URL = process.env["REACT_APP_BASE_URL"];
 
 export const WidgetContainer = ({ license = "", greeting = "" }) => {
 
