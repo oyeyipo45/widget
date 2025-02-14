@@ -21,9 +21,7 @@ function App() {
     const handleMessage = (evt) => {
       console.log(evt, "evt");
       
-      if ("greeting" in evt.data) {
-        setGreeting(evt.data.greeting);
-      } else if ("sendMessage" in evt.data) {
+     if ("sendMessage" in evt.data) {
         sendMessage({
           _id: nanoid(),
           message: evt.data.sendMessage,
@@ -36,7 +34,7 @@ function App() {
     window.addEventListener("message", handleMessage);
 
     return () => window.removeEventListener("message", handleMessage);
-  }, [setGreeting, sendMessage]);
+  }, [sendMessage]);
 
   return (
     <div className="App">
