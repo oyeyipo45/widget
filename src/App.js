@@ -1,23 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import { WidgetContainer } from "./WidgetContainer";
+import { useState, useEffect } from "react";
+import { useChat } from "./ChatProvider.jsx";
+import { nanoid } from "nanoid";
 
 function App() {
+  const [license, setLicense] = useState("");
+  const [greeting, setGreeting] = useState("");
+
+  const { sendMessage } = useChat();
+
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString); // doesn't work in IE, but who cares ;)
+    const license = urlParams.get("license");
+    setLicense(license);
+  }, []);
+
+  useEffect(() => {
+    const handleMessage = (evt) => {
+      console.log(evt, "evt");
+      
+      if ("greeting" in evt.data) {
+        setGreeting(evt.data.greeting);
+      } else if ("sendMessage" in evt.data) {
+        sendMessage({
+          _id: nanoid(),
+          message: evt.data.sendMessage,
+          sender: "remote",
+          direction: "outgoing",
+        });
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => window.removeEventListener("message", handleMessage);
+  }, [setGreeting]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <WidgetContainer license={license} greeting={greeting} />
     </div>
   );
 }

@@ -1,22 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Widget } from "./Widget";
 import { nanoid } from "nanoid";
+import {useChat} from "./ChatProvider";
 
 export const WidgetContainer = ({license = "", greeting = ""}) => {
 
-    const [messages, setMessages] = useState([]);
+    const {messages, sendMessage} = useChat();
 
     useEffect( () => {
         if ( greeting && messages.length === 0 ) {
-            setMessages(messages.concat({
-                _id: nanoid(),
-                message: greeting,
-                sender: "remote",
-                direction: "incoming",
-            }));
+           sendMessage({
+        _id: nanoid(),
+        message: greeting,
+        sender: "remote",
+        direction: "incoming",
+    });
         }
     },[greeting, messages]);
 
+    const remoteName = useMemo( () => {
+    if ( license === "123" ) {
+        return "Chatscope";
+    } else if (license === "456" ) {
+        return "ChatKitty";
+    } else if (license === "789" ) {
+        return "EvilNull";
+    }
+    }, [license]);
+    
     const handleSend = (message) => {
         const newMessages = [
             {
@@ -32,9 +43,9 @@ export const WidgetContainer = ({license = "", greeting = ""}) => {
                 direction: "incoming",
             }
         ];
-        setMessages(messages.concat(newMessages));
+        sendMessage(newMessages);
     };
 
-    return <Widget messages={messages} onSend={handleSend} />
+    return <Widget remoteName={remoteName}  messages={messages} onSend={handleSend} />
 
 };
