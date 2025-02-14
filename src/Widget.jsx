@@ -4,16 +4,18 @@ import { useChat } from "./ChatProvider";
 
 export const Widget = ({ remoteName = "", messages = [], onSend }) => {
     
-    const { hide } = useChat();
+    const { hide, appear } = useChat();
     
     return (
-        <MainContainer>
+        <div>
+            <p className="appear" onClick={appear}>APPEAR</p>
+            <MainContainer className="damilola">
             <ChatContainer>
                 <ConversationHeader>
                     <ConversationHeader.Content userName={ remoteName } />
                     <ConversationHeader.Actions>
-    <Button onClick={hide}>Hide</Button>
-</ConversationHeader.Actions>
+                        <Button onClick={hide}>Hide</Button>
+                    </ConversationHeader.Actions>
                 </ConversationHeader>
         
                 <MessageList>
@@ -29,5 +31,6 @@ export const Widget = ({ remoteName = "", messages = [], onSend }) => {
                 />
             </ChatContainer>
         </MainContainer>
+        </div>
     );
 };

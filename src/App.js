@@ -19,11 +19,12 @@ function App() {
   useEffect(() => {
     const handleMessage = (evt) => {
       console.log(evt, "evt");
-
-      if ("sendMessage" in evt.data) {
+      if ("hide" === evt?.data || "appear" === evt?.data) {
+        return;
+      } else if ("sendMessage" in evt?.data) {
         sendMessage({
           _id: nanoid(),
-          message: evt.data.sendMessage,
+          message: evt?.data?.sendMessage,
           sender: "remote",
           direction: "outgoing",
         });
