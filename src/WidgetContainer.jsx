@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Widget } from "./Widget";
 import { nanoid } from "nanoid";
 import {useChat} from "./ChatProvider";
