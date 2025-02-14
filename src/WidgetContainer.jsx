@@ -16,7 +16,7 @@ export const WidgetContainer = ({license = "", greeting = ""}) => {
         direction: "incoming",
     });
         }
-    },[greeting, messages]);
+    },[greeting, messages, sendMessage]);
 
     const remoteName = useMemo( () => {
     if ( license === "123" ) {

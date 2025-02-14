@@ -36,7 +36,7 @@ function App() {
     window.addEventListener("message", handleMessage);
 
     return () => window.removeEventListener("message", handleMessage);
-  }, [setGreeting]);
+  }, [setGreeting, sendMessage]);
 
   return (
     <div className="App">
