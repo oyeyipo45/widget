@@ -109,23 +109,23 @@ export const WidgetContainer = ({license = "", greeting = ""}) => {
     }
     };
     
-    const handleSend1 = (message) => {
-        const newMessages = [
-            {
-                _id: nanoid(),
-                message,
-                sender: "me",
-                direction: "outgoing",
-            },
-            {
-                _id: nanoid(),
-                message: `ECHO: ${message}`,
-                sender: "remote",
-                direction: "incoming",
-            }
-        ];
-        sendMessage(newMessages);
-    };
+    // const handleSend1 = (message) => {
+    //     const newMessages = [
+    //         {
+    //             _id: nanoid(),
+    //             message,
+    //             sender: "me",
+    //             direction: "outgoing",
+    //         },
+    //         {
+    //             _id: nanoid(),
+    //             message: `ECHO: ${message}`,
+    //             sender: "remote",
+    //             direction: "incoming",
+    //         }
+    //     ];
+    //     sendMessage(newMessages);
+    // };
 
     return <Widget remoteName={remoteName}  messages={currentMessages} onSend={handleSend} />
 

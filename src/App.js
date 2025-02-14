@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 import { WidgetContainer } from "./WidgetContainer";
 import { useState, useEffect } from "react";
 import { useChat } from "./ChatProvider.jsx";
@@ -6,7 +6,6 @@ import { nanoid } from "nanoid";
 
 function App() {
   const [license, setLicense] = useState("");
-  const [greeting, setGreeting] = useState("");
 
   const { sendMessage } = useChat();
 
@@ -20,8 +19,8 @@ function App() {
   useEffect(() => {
     const handleMessage = (evt) => {
       console.log(evt, "evt");
-      
-     if ("sendMessage" in evt.data) {
+
+      if ("sendMessage" in evt.data) {
         sendMessage({
           _id: nanoid(),
           message: evt.data.sendMessage,
@@ -35,6 +34,8 @@ function App() {
 
     return () => window.removeEventListener("message", handleMessage);
   }, [sendMessage]);
+
+  const greeting = "hello damilola";
 
   return (
     <div className="App">
