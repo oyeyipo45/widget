@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 
+export const TOKEN = process.env["REACT_APP_BEARER_TOKEN"];
+export const BASE_URL = process.env["REACT_APP_BASE_URL"];
+
 const ChatWidget = () => {
   const [messages, setMessages] = useState([
     { id: 1, text: "Hello! How can I help you today?", sender: "bot" }
@@ -18,12 +21,12 @@ const ChatWidget = () => {
 
   const sendMessageToAPI = async (message) => {
     try {
-      const response = await fetch('https://reporter.contextdata.dev/reports/b276e022-8a06-4b71-9a88-526a2d3baa6d/blocks/1d2cda36-92f7-4f01-993a-2156c9a36d3a/queries', {
+      const response = await fetch(BASE_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           // Add any required authentication headers
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbWlsb2xhQGNvbnRleHRkYXRhLmFpIiwibmFtZSI6IkRhbWlsb2xhIE95ZXlpcG8iLCJpZCI6IjA5MDE4MGI3LTRlZjgtNGUxOC1iMjIxLTYxOTY1NDA4MTYwMiIsImV4cCI6MTczOTk3NTAyMH0.tzlV2NNnTvRyM4Fg4F9pQmMBMjQA46NFgC1UCTRyles'
+          'Authorization': `Bearer ${TOKEN}`
         },
         body: JSON.stringify({
             query: message,
